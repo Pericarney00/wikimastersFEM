@@ -2,8 +2,11 @@
 
 import MDEditor from "@uiw/react-md-editor";
 import { Upload, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
+import { createArticle, updateArticle } from "@/app/actions/articles";
+import { uploadFile } from "@/app/actions/upload";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,12 +17,6 @@ interface WikiEditorProps {
   initialContent?: string;
   isEditing?: boolean;
   articleId?: string;
-}
-
-interface FormData {
-  title: string;
-  content: string;
-  files: File[];
 }
 
 interface FormErrors {
@@ -33,6 +30,7 @@ export default function WikiEditor({
   isEditing = false,
   articleId,
 }: WikiEditorProps) {
+  const router = useRouter();
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
   const [files, setFiles] = useState<File[]>([]);
@@ -59,7 +57,20 @@ export default function WikiEditor({
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
     if (selectedFiles) {
+      const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB limit for server actions
       const newFiles = Array.from(selectedFiles);
+
+      const oversizedFiles = newFiles.filter(
+        (file) => file.size > MAX_FILE_SIZE,
+      );
+      if (oversizedFiles.length > 0) {
+        alert(
+          `File "${oversizedFiles[0].name}" is too large. Maximum size is 1 MB.`,
+        );
+        event.target.value = "";
+        return;
+      }
+
       setFiles((prev) => [...prev, ...newFiles]);
     }
   };
@@ -79,30 +90,40 @@ export default function WikiEditor({
 
     setIsSubmitting(true);
 
-    const formData: FormData = {
-      title: title.trim(),
-      content: content.trim(),
-      files,
-    };
+    try {
+      // Upload file if present and get the URL
+      let imageUrl: string | undefined;
+      if (files.length > 0) {
+        const formData = new globalThis.FormData();
+        formData.append("files", files[0]);
+        const uploadResult = await uploadFile(formData);
+        imageUrl = uploadResult.url;
+      }
 
-    // Log the form data (as requested - no actual API calls)
-    console.log("Form submitted:", {
-      action: isEditing ? "edit" : "create",
-      articleId: isEditing ? articleId : undefined,
-      data: formData,
-    });
-
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setIsSubmitting(false);
-
-    // In a real app, you would navigate after successful submission
-    alert(
-      `Article ${
-        isEditing ? "updated" : "created"
-      } successfully! Check console for form data.`,
-    );
+      if (isEditing && articleId) {
+        // Update existing article
+        await updateArticle(articleId, {
+          title: title.trim(),
+          content: content.trim(),
+          imageUrl,
+        });
+        router.push(`/wiki/${articleId}`);
+      } else {
+        // Create new article
+        const result = await createArticle({
+          title: title.trim(),
+          content: content.trim(),
+          authorId: "", // The server action gets the user ID from the session
+          imageUrl,
+        });
+        router.push(`/wiki/${result.id}`);
+      }
+    } catch (error) {
+      console.error("Error saving article:", error);
+      alert(error instanceof Error ? error.message : "Failed to save article");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Handle cancel

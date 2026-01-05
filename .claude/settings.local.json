@@ -1,0 +1,7 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["stack-auth"],
+  "permissions": {
+    "allow": ["WebFetch(domain:fullstack-v4.holt.courses)"]
+  }
+}

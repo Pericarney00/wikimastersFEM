@@ -8,6 +8,13 @@
       "when": 1766524017716,
       "tag": "0000_round_riptide",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1767234297628,
+      "tag": "0001_worthless_mathemanic",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,108 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Wikimasters" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - navigation "Main" [ref=e6]:
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - button "TE" [ref=e10] [cursor=pointer]:
+              - generic [ref=e14]: TE
+  - generic [ref=e15]:
+    - heading "Create New Article" [level=1] [ref=e17]
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e21]: Article Title
+        - generic [ref=e23]:
+          - generic [ref=e24]: Title *
+          - textbox "Title *" [ref=e25]:
+            - /placeholder: Enter article title...
+      - generic [ref=e26]:
+        - generic [ref=e28]: Article Content
+        - generic [ref=e30]:
+          - generic [ref=e31]: Content (Markdown) *
+          - generic [ref=e33]:
+            - generic [ref=e34]:
+              - list [ref=e35]:
+                - listitem [ref=e36]:
+                  - button "Add bold text (ctrl + b)" [ref=e37] [cursor=pointer]:
+                    - img [ref=e38]
+                - listitem [ref=e40]:
+                  - button "Add italic text (ctrl + i)" [ref=e41] [cursor=pointer]:
+                    - img [ref=e42]
+                - listitem [ref=e44]:
+                  - button "Add strikethrough text (ctrl + shift + x)" [ref=e45] [cursor=pointer]:
+                    - img [ref=e46]
+                - listitem [ref=e48]:
+                  - button "Insert HR (ctrl + h)" [ref=e49] [cursor=pointer]:
+                    - img [ref=e50]
+                - listitem [ref=e52]:
+                  - button "Insert title" [ref=e53] [cursor=pointer]:
+                    - img [ref=e54]
+                - listitem [ref=e56]
+                - listitem [ref=e57]:
+                  - button "Add a link (ctrl + l)" [ref=e58] [cursor=pointer]:
+                    - img [ref=e59]
+                - listitem [ref=e61]:
+                  - button "Insert a quote (ctrl + q)" [ref=e62] [cursor=pointer]:
+                    - img [ref=e63]
+                - listitem [ref=e65]:
+                  - button "Insert code (ctrl + j)" [ref=e66] [cursor=pointer]:
+                    - img [ref=e67]
+                - listitem [ref=e69]:
+                  - button "Insert Code Block (ctrl + shift + j)" [ref=e70] [cursor=pointer]:
+                    - img [ref=e71]
+                - listitem [ref=e73]:
+                  - button "Insert comment (ctrl + /)" [ref=e74] [cursor=pointer]:
+                    - img [ref=e75]
+                - listitem [ref=e80]:
+                  - button "Add image (ctrl + k)" [ref=e81] [cursor=pointer]:
+                    - img [ref=e82]
+                - listitem [ref=e84]:
+                  - button "Add table" [ref=e85] [cursor=pointer]:
+                    - img [ref=e86]
+                - listitem [ref=e88]
+                - listitem [ref=e89]:
+                  - button "Add unordered list (ctrl + shift + u)" [ref=e90] [cursor=pointer]:
+                    - img [ref=e91]
+                - listitem [ref=e93]:
+                  - button "Add ordered list (ctrl + shift + o)" [ref=e94] [cursor=pointer]:
+                    - img [ref=e95]
+                - listitem [ref=e97]:
+                  - button "Add checked list (ctrl + shift + c)" [ref=e98] [cursor=pointer]:
+                    - img [ref=e99]
+                - listitem [ref=e101]
+                - listitem [ref=e102]:
+                  - button "Open help" [ref=e103] [cursor=pointer]:
+                    - img [ref=e104]
+              - list [ref=e106]:
+                - listitem [ref=e107]:
+                  - button "Edit code (ctrl + 7)" [ref=e108] [cursor=pointer]:
+                    - img [ref=e109]
+                - listitem [ref=e112]:
+                  - button "Live code (ctrl + 8)" [ref=e113] [cursor=pointer]:
+                    - img [ref=e114]
+                - listitem [ref=e117]:
+                  - button "Preview code (ctrl + 9)" [ref=e118] [cursor=pointer]:
+                    - img [ref=e119]
+                - listitem [ref=e122]
+                - listitem [ref=e123]:
+                  - button "Toggle fullscreen (ctrl + 0)" [ref=e124] [cursor=pointer]:
+                    - img [ref=e125]
+            - textbox "Write your article content in Markdown..." [ref=e130]
+      - generic [ref=e131]:
+        - generic [ref=e133]: Attachments
+        - generic [ref=e136]:
+          - img [ref=e137]
+          - generic [ref=e140]:
+            - generic [ref=e141] [cursor=pointer]: Click to upload files
+            - paragraph [ref=e142]: Upload images, documents, or other files to attach to your article
+          - button "Click to upload files" [ref=e143]
+      - generic [ref=e146]:
+        - button "Cancel" [ref=e147]
+        - button "Save Article" [ref=e148]
+  - alert [ref=e149]
+```

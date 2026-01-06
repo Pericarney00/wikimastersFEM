@@ -91,6 +91,7 @@ export async function updateArticle(id: string, data: UpdateArticleInput) {
     })
     .where(eq(articles.id, +id));
 
+  redis.del("articles:all");
   return { success: true, message: `Article ${id} update logged` };
 }
 
@@ -108,7 +109,8 @@ export async function deleteArticle(id: string) {
 
   const _response = await db.delete(articles).where(eq(articles.id, +id));
 
-  return { success: true, message: `Article ${id} delete logged (stub)` };
+  redis.del("articles:all");
+  return { success: true, message: `Article ${id} delete logged` };
 }
 
 // Form-friendly server action: accepts FormData from a client form and calls deleteArticle
